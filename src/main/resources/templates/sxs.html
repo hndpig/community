@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <title>实习生</title>
-
     <link rel="stylesheet" href="/static/css/bootstrap.css">
     <script src="/static/js/jquery-3.3.1.js"></script>
-    <script src="/static/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.js"></script>
     <link rel="stylesheet" href="/static/css/scs.css">
+    <script  type="text/javascript" src="/static/js/Vue/vue.js"></script>
+    <script src="/static/js/axios/axios.min.js"></script>
 </head>
 <body>
-    <div class="container app">
+    <div class="container "id="app" >
+
         <div class="row" style="margin-bottom: 30px">
             <div class="col-xs-12">
                 <h2 style="text-align: center" >欢迎来到实习生管理系统</h2>
             </div>
         </div>
+
+        <!--条件查询搜索-->
         <div class="row" >
             <div class="col-xs-12">
                 <form  id="findForm" class="form-inline">
@@ -67,7 +71,11 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-offset-5 col-xs-2 ">
-                            <button type="submit" class="btn btn-success">查询</button>
+                            <button class="btn btn-success">查询</button>
+                        </div>
+                        <div class=" col-xs-2 ">
+                            <a  class="btn btn-success"   data-toggle="modal" data-target="#addModal">添加</a>
+
                         </div>
                     </div>
 
@@ -75,6 +83,8 @@
 
             </div>
         </div>
+
+        <!--分页显示-->
         <div class="row" style="margin-top: 20px">
             <table class="table table-hover" id="t_table">
                 <tr>
@@ -91,243 +101,384 @@
                     <th colspan="2" class="text-center"> 操作</th>
                  </tr>
 
-                <tr id="t_tr">
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
+                <tr id="t_tr" v-for="(item,index) in objList" >
+                    <td>{{item.sId}}</td>
+                    <td>{{item.sSex}}</td>
+                    <td>{{item.sName}}</td>
+                    <td>{{item.age}}</td>
+                    <td>{{item.sSchool}}</td>
+                    <td>{{item.sNumber}}</td>
+                    <td>{{item.sPhone}}</td>
+                    <td>{{item.sStatus}}</td>
+                    <td>{{item.sEntryTime}}</td>
+                    <td>{{item.sGroup}}</td>
                     <td colspan="2" class="text-center">
-                        <button class="btn btn-xs btn-primary"data-toggle="modal" data-target="#myModal">修改</button>
+                        <button class="btn btn-xs btn-primary"data-toggle="modal"  data-target="#myModal">修改</button>
                         &nbsp;&nbsp;&nbsp;
-                        <button  class="btn btn-xs btn-danger">删除</button>
+                        <button  class="btn btn-xs btn-danger" @click="removeStudent(index)">删除</button>
                     </td>
                 </tr>
-                <tr id="t_tr9">
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td colspan="2" class="text-center">
-                        <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal">修改</button>
-                        &nbsp;&nbsp;&nbsp;
-                        <button  class="btn btn-xs btn-danger">删除</button>
-                    </td>
-                </tr>
-                <tr id="t_tr8">
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td colspan="2" class="text-center">
-                        <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal">修改</button>
-                        &nbsp;&nbsp;&nbsp;
-                        <button  class="btn btn-xs btn-danger">删除</button>
-                    </td>
-                </tr>
-                <tr id="t_tr7">
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td colspan="2" class="text-center">
-                        <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal">修改</button>
-                        &nbsp;&nbsp;&nbsp;
-                        <button  class="btn btn-xs btn-danger">删除</button>
-                    </td>
-                </tr>
-                <tr id="t_tr6">
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td colspan="2" class="text-center">
-                        <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal">修改</button>
-                        &nbsp;&nbsp;&nbsp;
-                        <button  class="btn btn-xs btn-danger">删除</button>
-                    </td>
-                </tr>
-                <tr id="t_tr5">
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td colspan="2" class="text-center">
-                        <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal">修改</button>
-                        &nbsp;&nbsp;&nbsp;
-                        <button  class="btn btn-xs btn-danger">删除</button>
-                    </td>
-                </tr>
-                <tr id="t_tr4">
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td colspan="2" class="text-center">
-                        <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal">修改</button>
-                        &nbsp;&nbsp;&nbsp;
-                        <button  class="btn btn-xs btn-danger">删除</button>
-                    </td>
-                </tr>
-                <tr id="t_tr3">
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td colspan="2" class="text-center">
-                        <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal">修改</button>
-                        &nbsp;&nbsp;&nbsp;
-                        <button  class="btn btn-xs btn-danger">删除</button>
-                    </td>
-                </tr>
-                <tr id="t_tr2">
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td colspan="2" class="text-center">
-                        <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal">修改</button>
-                        &nbsp;&nbsp;&nbsp;
-                        <button  class="btn btn-xs btn-danger">删除</button>
-                    </td>
-                </tr>
-                <tr id="t_tr1">
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td>5965</td>
-                    <td colspan="2" class="text-center">
-                        <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal">修改</button>
-                        &nbsp;&nbsp;&nbsp;
-                        <button  class="btn btn-xs btn-danger">删除</button>
-                    </td>
-                </tr>
+
 
             </table>
             
         </div>
+
+
+
+        <!--分页条-->
         <div class="row">
             <div class="col-xs-6 col-xs-offset-3">
 
                 <nav aria-label="">
                     <ul class="pagination">
-                        <li><a href="#">上一页</a></li>
-                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                        <li class=""><a href="#">2 <span class="sr-only">(current)</span></a></li>
-                        <li class=""><a href="#">3 <span class="sr-only">(current)</span></a></li>
-                        <li class=""><a href="#">4 <span class="sr-only">(current)</span></a></li>
-                        <li class=""><a href="#">5 <span class="sr-only">(current)</span></a></li>
-                        <li class=""><a href="#">6 <span class="sr-only">(current)</span></a></li>
-                        <li class=""><a href="#">7 <span class="sr-only">(current)</span></a></li>
+                        <li :class="{disabled:!barObj.hasPreviousPage}"@click="upDateStudentList(barObj.prePage)"><a>上一页</a></li>
+                        <li v-for = "bar in barObj.navigatepageNums" @click="upDateStudentList(bar)" :class="{active: barObj.pageNum==bar }"><a href="#">{{bar}}</a></li>
                         <li class=""><a href="#">... <span class="sr-only">(current)</span></a></li>
-                        <li class=""><a href="#">200 <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">下一页</a></li>
+                        <li :class="{disabled:!barObj.hasNextPage}" @click="upDateStudentList(barObj.nextPage)"><a href="#">下一页</a></li>
 
                     </ul>
                 </nav>
             </div>
         </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">修改实习生信息</h4>
-                </div>
-                        <div class="row">
-                            <div class = col-xs-12>
-                                <form>
-                                    <table   style="width: 100%">
-                                        <tr class="row">
-                                            <td class="col-xs-2">111</td>
-                                            <td class="col-xs-10">222</td>
-                                        </tr>
-
-                                        <tr class="row">
-                                            <td  class="col-xs-12" style="text-align: center">
-                                                <button type="button" class="btn btn-primary">保存</button>
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-
-                                            </td>
-                                        </tr>
 
 
-                                    </table>
 
 
-                                </form>
+        <!-- 添加实习生-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="addModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">添加实习生</h4>
+                    </div>
+                    <div class="modal-body">					<!-- form-->
+                        <form class="form-horizontal" id="addForm">
+                            <div class="form-group">
+                                <label for="addSId"
+                                       class="col-sm-2 control-label col-sm-offset-2">编号</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control col-sm-8" id="addSId" name="sId" readonly>
+                                </div>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label for="addSName"class="col-sm-2 control-label col-sm-offset-2">姓名</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control col-sm-8" id="addSName"placeholder="姓名" name="sName">
+                                    <span class="help-block" style="font-size: 12px"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="addAge"
+                                       class="col-sm-2 control-label col-sm-offset-2">年龄</label>
+                                <div class="col-sm-5">
+                                    <input type="number" class="form-control col-sm-8" id="addAge"placeholder="年龄" name="age">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="addSSex"
+                                       class="col-sm-2 control-label col-sm-offset-2">性别</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control col-sm-8" id="addSSex"placeholder="性别" name="sSex">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="addSPhone" class="col-sm-2 control-label col-sm-offset-2">手机号码</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control col-sm-8" id="addSPhone"placeholder="手机号码" name="sPhone">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="addSSchool" class="col-sm-2 control-label col-sm-offset-2">学生学校</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control col-sm-8" id="addSSchool"
+                                           placeholder="college" name = "sSchool">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="addSNumber" class="col-sm-2 control-label col-sm-offset-2">学生学号</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control col-sm-8" id="addSNumber"
+                                           placeholder="college" name = "sNumber">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="addSEntryTime"
+                                       class="col-sm-2 control-label col-sm-offset-2">入职时间</label>
+                                <div class="col-sm-5">
+                                    <input type="date" class="form-control col-sm-8" id="addSEntryTime"name="sEntryTime">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="addSWorkingTime"
+                                       class="col-sm-2 control-label col-sm-offset-2">实习时长</label>
+                                <div class="col-sm-5">
+                                    <input type="number" class="form-control col-sm-8" id="addSWorkingTime" name="sWorkingTime">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="addSStatus" class="col-sm-2 control-label col-sm-offset-2">入职状态</label>
+                                <div class="col-sm-5">
+                                    <input type="number" class="form-control col-sm-8" id="addSStatus"
+                                           placeholder="sStatus" name="sStatus">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="addSGroup" class="col-sm-2 control-label col-sm-offset-2">所在部门</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control col-sm-8" id="addSGroup"
+                                           placeholder="sGroup" name="sGroup">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2 col-sm-offset-4">
+                                    <a class="btn btn-success"  id="addBtn" @click="addStudent" >提交</a>
+                                </div>
+                                <div class="col-sm-2 ">
+                                    <button type="reset" class="btn btn-default">重置</button>
+                                </div>
+                            </div>
 
+                        </form>
 
+                    </div>
 
-
-
+                </div>
+                <!-- /.modal-content -->
             </div>
+            <!-- /.modal-dialog -->
         </div>
+        <!-- /.modal -->
+
+
+
+
+
+
+
+
+
+
+        <!--实习生编辑-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">编辑实习生信息</h4>
+                    </div>
+                    <div class="modal-body">					<!-- form-->
+                        <form class="form-horizontal" id="editForm">
+
+                            <div class="form-group">
+                                <label for="editSId"
+                                       class="col-sm-2 control-label col-sm-offset-2">编号</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control col-sm-8" id="editSId" name="sId" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="editSName"class="col-sm-2 control-label col-sm-offset-2">姓名</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control col-sm-8" id="editSName"placeholder="姓名" name="sName">
+                                    <span id="helpBlock" class="help-block" style="font-size: 12px"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editAge"
+                                       class="col-sm-2 control-label col-sm-offset-2">年龄</label>
+                                <div class="col-sm-5">
+                                    <input type="number" class="form-control col-sm-8" id="editAge"placeholder="job" name="age">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editSSex"
+                                       class="col-sm-2 control-label col-sm-offset-2">性别</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control col-sm-8" id="editSSex"placeholder="性别" name="sSex">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="EditSPhone" class="col-sm-2 control-label col-sm-offset-2">手机号码</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control col-sm-8" id="EditSPhone"placeholder="手机号码" name="sPhone">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editSSchool" class="col-sm-2 control-label col-sm-offset-2">学生学校</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control col-sm-8" id="editSSchool"
+                                           placeholder="college" name = "sSchool">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editSEntryTime"
+                                       class="col-sm-2 control-label col-sm-offset-2">入职时间</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control col-sm-8" id="editSEntryTime"readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editSStatus" class="col-sm-2 control-label col-sm-offset-2">入职状态</label>
+                                <div class="col-sm-5">
+                                    <input type="number" class="form-control col-sm-8" id="editSStatus"
+                                           placeholder="sStatus" name="sStatus">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editSGroup" class="col-sm-2 control-label col-sm-offset-2">所在部门</label>
+                                <div class="col-sm-5">
+                                    <input type="number" class="form-control col-sm-8" id="editSGroup"
+                                           placeholder="sGroup" name="sGroup">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <div class="col-sm-2 col-sm-offset-4">
+                                    <a class="btn btn-success" id="editBtn" >提交</a>
+                                </div>
+                                <div class="col-sm-2 ">
+                                    <button type="reset" class="btn btn-default">重置</button>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
     </div>
+
+
 
 </body>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            objList:[],
+            barObj:{}
+        },
+        methods:{
+            createSxs: function (sId,sSex,sName,age,sSchool,sNumber,sPhone,sStatus,sEntryTime,sWorkingTime,sGroup ) {
+                var obj = new Object;
+                obj.sId=sId;
+                obj.sSex = sSex;
+                obj.sName = sName;
+                obj.age = age;
+                obj.sSchool = sSchool;
+                obj.sNumber=sNumber;
+                obj.sPhone=sPhone;
+                obj.sStatus = sStatus;
+                obj.sEntryTime = sEntryTime;
+                obj.sWorkingTime = sWorkingTime;
+                obj.sGroup = sGroup;
+                return obj;
+            },
+            createPageObj:function () {
+                return null;
+            },
+            creatPageBar: function (total, pageNum, prePage, nextPage, hasPreviousPage, hasNextPage, navigatepageNums, lastPage, pages) {
+                var pageObj = new Object;
+                pageObj.total = total;
+                pageObj.pageNum = pageNum;
+                pageObj.prePage = prePage;
+                pageObj.nextPage = nextPage;
+                pageObj.hasPreviousPage = hasPreviousPage;
+                pageObj.hasNextPage = hasNextPage;
+                pageObj.navigatepageNums = navigatepageNums;
+                pageObj.lastPage = lastPage;
+                pageObj.pages = pages;
+
+                return pageObj;
+
+            },
+            addStudent:function () {
+                console.log("进入提交实习生的方法")
+                var form_values = $("#addForm").serialize();
+                axios.post("/test2/",form_values).then(function (respone) {
+                    console.log(respone.data.status)
+                    if(respone.data.status==200){
+                        alert("添加成功");
+                        $("#addModal").modal({backdrop:'static',keyboard:false});
+                        $("#addModal").modal("hide")
+                    }else{
+                        alter("添加失败")
+                    }
+
+                })
+
+            },
+            removeStudent:function(index){
+
+                var that = this.objList;
+                axios.post("/test3/",index).then(function (value) {
+                    if(value.data.status==200){
+                        alert("删除成功");
+                        that.splice(index,1)
+
+                    }else{
+                        alter("删除失败")
+                    }
+                })
+            },
+            modifyStudent:function () {
+                var form_values = $("#editForm").serialize();
+                axios.post("/test2/",form_values).then(function (respone) {
+                    console.log(respone.data.status)
+                    if(respone.data.status==200){
+                        alert("修改成功");
+                        $("#myModal").modal({backdrop:'static',keyboard:false});
+                        $("#myModal").modal("hide")
+                    }else{
+                        alter("修改失败")
+                    }
+
+                })
+
+            },
+            upDateStudentList:function(pn){
+                console.log(pn)
+                this.objList.splice(0,this.objList.length)
+                for (var i = pn;i<pn+10;i++){
+                    var obj = this.createSxs("sId"+i,"sSex1"+i,"sName"+i,"age"+i,"sSchool"+i,"sNumber"+i,"sPhone"+i,"sStatus"+i,"sEntryTime"+i,"sWorkingTime"+i,"sGroup"+i )
+                    this.objList.push(obj)
+                }
+            }
+
+        },
+        created: function () {
+            for (var i = 0;i<10;i++){
+                var obj = this.createSxs("sId"+i,"sSex1"+i,"sName"+i,"age"+i,"sSchool"+i,"sNumber"+i,"sPhone"+i,"sStatus"+i,"sEntryTime"+i,"sWorkingTime"+i,"sGroup"+i )
+            this.objList.push(obj)
+            }
+
+            var list = [1,2,3,4,5,6,7];
+            var pageBar = this.creatPageBar(70, 1, 0, 2,false, true, list, 2, 2);
+            this.barObj = pageBar;
+            console.log(this.barObj)
+
+
+        }
+
+
+
+    })
+</script>
 </html>

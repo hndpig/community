@@ -2,6 +2,8 @@ package com.hnd.community.controller;
 
 import com.github.pagehelper.Page;
 import com.hnd.community.bean.Msg;
+import com.hnd.community.bean.Student;
+import com.hnd.community.bean.SysResult;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,5 +34,24 @@ public class TestController {
     @RequestMapping("/test")
     public  String test(){
         return "sxs";
+    }
+
+    @ResponseBody
+    @RequestMapping("/test2")
+    public  SysResult test2(Student st){
+        System.out.println(st);
+        SysResult result = new SysResult();
+        result.setStatus(200);
+        return result;
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/test3")
+    public  SysResult test3(Student st){
+        System.out.println(st);
+        SysResult result = new SysResult();
+        result.setStatus(200);
+        return result;
     }
 }

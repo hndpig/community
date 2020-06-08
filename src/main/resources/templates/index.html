@@ -17,7 +17,7 @@
 <div th:replace="public::nav"></div>
 
 <div class="row container panel panel-info bgImage center-block">
-    <div class="col-xs-9 left_div" id="section_left">
+    <div class="col-xs-9 left_div" id="section_left" >
 
         <div class="media  panel panel-info" v-for="obj in objs" style="height: 121px; position: relative">
             <div class="media-left media-heading">
@@ -35,7 +35,7 @@
         </div>
 
         <div class="pagnation " id="pagnation">
-            <a  class="page-prev bar" @click="update_articles(page_bar.prePage)" :class="{hidden:!page_bar.hasPreviousPage}">上一页</a>
+            <a  class="page-prev bar"  @click="update_articles(page_bar.prePage)" :class="{hidden:!page_bar.hasPreviousPage}">上一页</a>
 
             <a class="bar" @click="update_articles(1)" :class="{hidden:page_bar.pageNum<4}">1</a>
             <span  style="text-align: center;margin-left: 4px" :class="{hidden:page_bar.pageNum<4}">...</span>

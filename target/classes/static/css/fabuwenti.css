@@ -1,0 +1,71 @@
+.bgImage{
+    /*background: url("../images/bg_01.jpg") no-repeat;*/
+}
+.section_left{
+    border-right:1px solid #eee ;
+    padding-right: 35px;
+}
+.form_group_main{
+    margin-top: 25px;
+}
+hr{
+    border: 0;
+    border-top: 1px solid #eee;
+   margin-bottom: 0;
+}
+#h4_1{
+    text-align: right;
+    position: relative;
+    top: 23px;
+}
+#span_1{
+    border-bottom: 2px solid #3cc19c;
+}
+#hr_1{
+    position: relative;
+    top: -25px;
+}
+.lbspan{
+    margin-left: 10px;
+}
+.ul_style{
+    list-style: none;
+    margin-top: 15px;
+}
+
+#ul_2 li,#ul_1 li{
+    margin-left: 5px;
+    float: left;
+    cursor: pointer;
+}
+#ul_2 li span,#ul_1 li span{
+    font-size: 12px;
+
+}
+.btn_drop{
+    float: right;
+    position: relative;
+    top: -9px;
+    font-size: 10px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    outline: none;
+    text-align: center;
+    right: 3px;
+    padding: 0;
+    cursor: pointer;
+    border: 0;
+    opacity: 0.2;
+}
+#ul_1 li span:hover .btn_drop{
+    opacity: 0.7;
+}
+.btn_drop:hover{
+    opacity: 0.7;
+}
+.active_opacity{
+    opacity: 0.7;
+}

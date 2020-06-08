@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hnd.community.dao.UserMapper">
+    <!--   UserModel selectUserByToken(String token);-->
+    <select id="selectUserByToken" resultType="com.hnd.community.bean.UserModel" >
+        select acountId id,userName login,token,gmt_createTime,gmt_modity,avatar_url,bio from user where token = #{token}
+    </select>
+
+<!-- UserModel selectUserById(String id);-->
+    <select id="selectUserById" resultType="com.hnd.community.bean.UserModel" >
+        select acountId,userName login,avatar_url avatarUrl,bio from user where acountId = #{id}
+    </select>
+
+
+<!--      Integer insertUser(UserModel user)-->
+    <insert id="insertUser" parameterType="com.hnd.community.bean.UserModel" >
+        insert into user(acountId, userName, token, gmt_createTime, gmt_modity, avatar_url, bio) values (
+        #{id},
+        #{login},
+        #{token},
+        #{gmt_createTime},
+        #{gmt_modity},
+        #{avatar_url},
+        #{bio}
+        )
+    </insert>
+
+    <!-- int upDateUser(UserModel userModel);-->
+    <update id="upDateUser" parameterType="com.hnd.community.bean.UserModel">
+        update user set
+         userName = #{login},
+         token = #{token},
+         avatar_url = #{avatarUrl},
+         bio = #{bio},
+         gmt_createTime = #{gmt_createTime},
+         gmt_modity = #{gmt_modity}
+         where acountId = #{id}
+    </update>
+</mapper>

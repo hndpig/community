@@ -84,6 +84,7 @@ $(function() {
             var articles = this.getMsg(1);
             console.log(articles)
             this.renderData(articles)
+            console.log(this.page_bar)
             console.log(articles)
 
         }
