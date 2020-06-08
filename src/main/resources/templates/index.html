@@ -1,0 +1,64 @@
+<!DOCTYPE html >
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>hello</title>
+    <link rel="stylesheet" type="text/css"  href="/static/css/bootstrap.css">
+    <script src="static/js/jquery-3.3.1.js"type="text/javascript"></script>
+    <script src="static/js/bootstrap.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="static/css/zzsc.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <script src="/static/js/Vue/vue.js"></script>
+    <script src="/static/js/index.js"></script>
+</head>
+<body>
+
+<div th:replace="public::nav"></div>
+
+<div class="row container panel panel-info bgImage center-block">
+    <div class="col-xs-9 left_div" id="section_left">
+
+        <div class="media  panel panel-info" v-for="obj in objs" style="height: 121px; position: relative">
+            <div class="media-left media-heading">
+                <a href="#">
+                    <img class="media-object" style="width: 50px" :src="obj.img" alt="马刺">
+                </a>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">{{obj.title}}</h4>
+
+                <p class="limitp">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.content}}</p>
+                <p style="font-size: 12px;position: absolute;bottom: 0;right:45px" > {{obj.read}}人浏览，{{obj.conment}}人评论，{{obj.like}}人点赞</p>
+                <p style="font-size:10px;">标签：<span class="label label-success" v-for="tag in obj.tags" style="margin-right:5px;">{{tag}}</span></p>
+            </div>
+        </div>
+
+        <div class="pagnation " id="pagnation">
+            <a  class="page-prev bar" @click="update_articles(page_bar.prePage)" :class="{hidden:!page_bar.hasPreviousPage}">上一页</a>
+
+            <a class="bar" @click="update_articles(1)" :class="{hidden:page_bar.pageNum<4}">1</a>
+            <span  style="text-align: center;margin-left: 4px" :class="{hidden:page_bar.pageNum<4}">...</span>
+            <a class="bar" v-for="bar in page_bar.navigatepageNums":class="{current: page_bar.pageNum==bar }" @click="update_articles(bar)">{{bar}}</a>
+            <span :class="{hidden:page_bar.pages-page_bar.pageNum<=2}" style="text-align: center;margin-left: 4px">...</span>
+            <a  class="bar" @click="update_articles(page_bar.pages)" :class="{hidden:page_bar.pages-page_bar.pageNum<=2}">{{page_bar.pages}}</a>
+            <a class="page-next bar" @click="update_articles(page_bar.nextPage)" :class="{hidden:!page_bar.hasNextPage}" >下一页</a>
+        </div>
+    </div>
+    <div class="col-xs-3 right_div">
+        <div class="list-group">
+            <a href="#" class="list-group-item active"><span class="glyphicon glyphicon-home">&nbsp;最新动态</span></a>
+            <a href="#" class="list-group-item"><span class="glyphicon glyphicon-file">&nbsp;我的草稿</span></a>
+            <a href="#" class="list-group-item"><span class="glyphicon glyphicon-check">&nbsp;我的收藏</span></a>
+            <a href="#" class="list-group-item"><span class="glyphicon glyphicon-list-alt">&nbsp;我的话题</span></a>
+            <a href="#" class="list-group-item"><span class="glyphicon glyphicon-comment">&nbsp;我关注的话题</span></a>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+</body>
+</html>
