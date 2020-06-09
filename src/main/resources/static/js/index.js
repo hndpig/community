@@ -58,7 +58,7 @@ $(function() {
                 this.objs.length = 0;
                 this.page_bar.length = 0;
                 var pagetotal = articles.extend.pageInfo;
-                var pagesdata = pagetotal.list
+                var pagesdata = pagetotal.list;
                 //渲染文章数据
                 for (var i in pagesdata) {
                     console.log("+++++++++++++++++++++++++++++++++")

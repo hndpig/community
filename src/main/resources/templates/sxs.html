@@ -112,8 +112,8 @@
                     <td>{{item.sStatus}}</td>
                     <td>{{item.sEntryTime}}</td>
                     <td>{{item.sGroup}}</td>
-                    <td colspan="2" class="text-center">
-                        <button class="btn btn-xs btn-primary"data-toggle="modal"  data-target="#myModal">修改</button>
+                    <td colspan="2" class="text-center"><!--data-toggle="modal"  data-target="#myModal"-->
+                        <button class="btn btn-xs btn-primary"  @click="openMyModal(index)">修改</button>
                         &nbsp;&nbsp;&nbsp;
                         <button  class="btn btn-xs btn-danger" @click="removeStudent(index)">删除</button>
                     </td>
@@ -133,8 +133,8 @@
                 <nav aria-label="">
                     <ul class="pagination">
                         <li :class="{disabled:!barObj.hasPreviousPage}"@click="upDateStudentList(barObj.prePage)"><a>上一页</a></li>
-                        <li v-for = "bar in barObj.navigatepageNums" @click="upDateStudentList(bar)" :class="{active: barObj.pageNum==bar }"><a href="#">{{bar}}</a></li>
-                        <li class=""><a href="#">... <span class="sr-only">(current)</span></a></li>
+                        <li v-for = "bar in barObj.navigatepageNums" @click="upDateStudentList(bar)"  :class="{active: barObj.pageNum==bar }"><a href="#">{{bar}}</a></li>
+                        <li class=""><a href="#">...</a></li>
                         <li :class="{disabled:!barObj.hasNextPage}" @click="upDateStudentList(barObj.nextPage)"><a href="#">下一页</a></li>
 
                     </ul>
@@ -254,15 +254,6 @@
         </div>
         <!-- /.modal -->
 
-
-
-
-
-
-
-
-
-
         <!--实习生编辑-->
         <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
 
@@ -282,7 +273,8 @@
                                 <label for="editSId"
                                        class="col-sm-2 control-label col-sm-offset-2">编号</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control col-sm-8" id="editSId" name="sId" readonly>
+                                    <!--sId,sSex,sName,age,sSchool,sNumber,sPhone,sStatus,sEntryTime,sWorkingTime,sGroup-->
+                                    <input type="text" class="form-control col-sm-8" id="editSId" name="sId" value="{{sxsObj.sId}}" readonly>
                                 </div>
                             </div>
 
@@ -365,15 +357,14 @@
         <!-- /.modal -->
     </div>
 
-
-
 </body>
 <script>
     var app = new Vue({
         el:"#app",
         data:{
             objList:[],
-            barObj:{}
+            barObj:{},
+            sxsObj:{}
         },
         methods:{
             createSxs: function (sId,sSex,sName,age,sSchool,sNumber,sPhone,sStatus,sEntryTime,sWorkingTime,sGroup ) {
@@ -391,9 +382,6 @@
                 obj.sGroup = sGroup;
                 return obj;
             },
-            createPageObj:function () {
-                return null;
-            },
             creatPageBar: function (total, pageNum, prePage, nextPage, hasPreviousPage, hasNextPage, navigatepageNums, lastPage, pages) {
                 var pageObj = new Object;
                 pageObj.total = total;
@@ -408,6 +396,11 @@
 
                 return pageObj;
 
+            },
+            openMyModal:function(val){
+                console.log(val)
+                $('#myModal').modal('toggle')
+                this.sxsObj=this.objList(val);
             },
             addStudent:function () {
                 console.log("进入提交实习生的方法")
@@ -425,21 +418,21 @@
                 })
 
             },
-            removeStudent:function(index){
-
+            removeStudent:function(val){
                 var that = this.objList;
-                axios.post("/test3/",index).then(function (value) {
+                axios.post("/test3/",val).then(function (value) {
                     if(value.data.status==200){
                         alert("删除成功");
-                        that.splice(index,1)
-
+                        that.splice(val,1)
                     }else{
                         alter("删除失败")
                     }
                 })
             },
-            modifyStudent:function () {
+            modifyStudent:function (val) {
                 var form_values = $("#editForm").serialize();
+
+
                 axios.post("/test2/",form_values).then(function (respone) {
                     console.log(respone.data.status)
                     if(respone.data.status==200){
@@ -453,13 +446,39 @@
                 })
 
             },
+            /*获取分页数据  jqajax*/
+            getMsg:function(pn){
+                var data;
+                $.ajax({
+                    async:false,
+                    url:"/getSxss/" + pn,
+                    success:function (data) {
+                       data =  data
+                    }
+                });
+                return data;
+            },
+            /*更新页面的分页数据*/
             upDateStudentList:function(pn){
                 console.log(pn)
-                this.objList.splice(0,this.objList.length)
+                var data = this.getMsg(pn);
+                this.objList.splice(0,this.objList.length);
+
+
+
                 for (var i = pn;i<pn+10;i++){
                     var obj = this.createSxs("sId"+i,"sSex1"+i,"sName"+i,"age"+i,"sSchool"+i,"sNumber"+i,"sPhone"+i,"sStatus"+i,"sEntryTime"+i,"sWorkingTime"+i,"sGroup"+i )
                     this.objList.push(obj)
                 }
+            },
+            /*渲染数据*/
+            renderData:function (data) {
+                this.objList.length=0;
+                this.page_bar=null;
+                /*渲染数据*/
+
+                /*渲染分页条*/
+
             }
 
         },
